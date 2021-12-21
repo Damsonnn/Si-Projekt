@@ -1,0 +1,580 @@
+package com.sample
+import org.kie.api.runtime.KieRuntime
+import java.util.*;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+import com.sample.Wybor;
+
+global JFrame frame
+global javax.swing.JTextArea textArea
+
+rule "Drama or Comedy?"
+    when
+    then
+    ArrayList<String> warianty = new ArrayList<>();
+    warianty.add("Drama");
+    warianty.add("Comedy");
+    warianty.add("A little of both");
+    Wybor wybor = zapytaj(frame, kcontext.getKieRuntime(), "Drama or Comedy?", warianty);
+    insert (wybor);
+end
+
+rule "Drama or Comedy? - Drama"
+    when
+    Wybor(pytanie == "Drama or Comedy?" && wybor == "Drama")
+    then
+    ArrayList<String> warianty = new ArrayList<>();
+    warianty.add("Yes");
+    warianty.add("No");
+    Wybor wybor = zapytaj(frame, kcontext.getKieRuntime(), "Do you like SCI?", warianty);
+    insert (wybor);
+end
+
+rule "Do you like SCI? - Yes"
+    when
+    Wybor(pytanie == "Do you like SCI?" && wybor == "Yes")
+    then
+    ArrayList<String> warianty = new ArrayList<>();
+    warianty.add("Yes");
+    warianty.add("No");
+    Wybor wybor = zapytaj(frame, kcontext.getKieRuntime(), "Can you handle gore?", warianty);
+    insert (wybor);
+end
+
+rule "Can you handle gore? - Yes"
+    when
+    Wybor(pytanie == "Can you handle gore?" && wybor == "Yes")
+    then
+    ArrayList<String> warianty = new ArrayList<>();
+    warianty.add("Yes");
+    warianty.add("No");
+    Wybor wybor = zapytaj(frame, kcontext.getKieRuntime(), "Do you like Zombies?", warianty);
+    insert (wybor);
+end
+
+rule "Do you like Zombies? - Yes"
+    when
+    Wybor(pytanie == "Do you like Zombies?" && wybor == "Yes")
+    then
+    wybierz(frame, kcontext.getKieRuntime(), "The walking dead");
+end
+
+
+rule "Do you like Zombies? - No"
+    when
+    Wybor(pytanie == "Do you like Zombies?" && wybor == "No")
+    then
+    ArrayList<String> warianty = new ArrayList<>();
+    warianty.add("Yes");
+    warianty.add("No");
+    Wybor wybor = zapytaj(frame, kcontext.getKieRuntime(), "Vampires?", warianty);
+    insert (wybor);
+end
+
+rule "Vampires? - Yes"
+    when
+    Wybor(pytanie == "Vampires?" && wybor == "Yes")
+    then
+    wybierz(frame, kcontext.getKieRuntime(), "The Vampire diaries");
+end
+
+
+rule "Vampires? - No"
+    when
+    Wybor(pytanie == "Vampires?" && wybor == "No")
+    then
+    wybierz(frame, kcontext.getKieRuntime(), "Supernatural");
+end
+
+
+rule "Can you handle gore? - No"
+    when
+    Wybor(pytanie == "Can you handle gore?" && wybor == "No")
+    then
+    ArrayList<String> warianty = new ArrayList<>();
+    warianty.add("Yes");
+    warianty.add("No");
+    Wybor wybor = zapytaj(frame, kcontext.getKieRuntime(), "British characters?", warianty);
+    insert (wybor);
+end
+
+rule "British characters? - Yes"
+    when
+    Wybor(pytanie == "British characters?" && wybor == "Yes")
+    then
+    wybierz(frame, kcontext.getKieRuntime(), "Dr.Who");
+end
+
+
+rule "British characters? - No"
+    when
+    Wybor(pytanie == "British characters?" && wybor == "No")
+    then
+    wybierz(frame, kcontext.getKieRuntime(), "Lost");
+end
+
+
+rule "Do you like SCI? - No"
+    when
+    Wybor(pytanie == "Do you like SCI?" && wybor == "No")
+    then
+    ArrayList<String> warianty = new ArrayList<>();
+    warianty.add("Yes");
+    warianty.add("No");
+    Wybor wybor = zapytaj(frame, kcontext.getKieRuntime(), "Politics?", warianty);
+    insert (wybor);
+end
+
+rule "Politics? - Yes"
+    when
+    Wybor(pytanie == "Politics?" && wybor == "Yes")
+    then
+    ArrayList<String> warianty = new ArrayList<>();
+    warianty.add("Yes");
+    warianty.add("No");
+    Wybor wybor = zapytaj(frame, kcontext.getKieRuntime(), "Need action?", warianty);
+    insert (wybor);
+end
+
+rule "Need action? - Yes"
+    when
+    Wybor(pytanie == "Need action?" && wybor == "Yes")
+    then
+    wybierz(frame, kcontext.getKieRuntime(), "24");
+end
+
+
+rule "Need action? - No"
+    when
+    Wybor(pytanie == "Need action?" && wybor == "No")
+    then
+    ArrayList<String> warianty = new ArrayList<>();
+    warianty.add("Yes");
+    warianty.add("No");
+    Wybor wybor = zapytaj(frame, kcontext.getKieRuntime(), "Scandalous romance?", warianty);
+    insert (wybor);
+end
+
+rule "Scandalous romance? - Yes"
+    when
+    Wybor(pytanie == "Scandalous romance?" && wybor == "Yes")
+    then
+    wybierz(frame, kcontext.getKieRuntime(), "scandal");
+end
+
+
+rule "Scandalous romance? - No"
+    when
+    Wybor(pytanie == "Scandalous romance?" && wybor == "No")
+    then
+    ArrayList<String> warianty = new ArrayList<>();
+    warianty.add("Optimistic");
+    warianty.add("Cynical");
+    Wybor wybor = zapytaj(frame, kcontext.getKieRuntime(), "Optimistic or cynical?", warianty);
+    insert (wybor);
+end
+
+rule "Optimistic or cynical? - Optimistic"
+    when
+    Wybor(pytanie == "Optimistic or cynical?" && wybor == "Optimistic")
+    then
+    wybierz(frame, kcontext.getKieRuntime(), "The west wing");
+end
+
+
+rule "Optimistic or cynical? - Cynical"
+    when
+    Wybor(pytanie == "Optimistic or cynical?" && wybor == "Cynical")
+    then
+    wybierz(frame, kcontext.getKieRuntime(), "House of cards");
+end
+
+
+rule "Politics? - No"
+    when
+    Wybor(pytanie == "Politics?" && wybor == "No")
+    then
+    ArrayList<String> warianty = new ArrayList<>();
+    warianty.add("Yes");
+    warianty.add("No");
+    Wybor wybor = zapytaj(frame, kcontext.getKieRuntime(), "Feel like crying?", warianty);
+    insert (wybor);
+end
+
+rule "Feel like crying? - Yes"
+    when
+    Wybor(pytanie == "Feel like crying?" && wybor == "Yes")
+    then
+    ArrayList<String> warianty = new ArrayList<>();
+    warianty.add("Yes");
+    warianty.add("No");
+    Wybor wybor = zapytaj(frame, kcontext.getKieRuntime(), "Do you like football?", warianty);
+    insert (wybor);
+end
+
+rule "Do you like football? - Yes"
+    when
+    Wybor(pytanie == "Do you like football?" && wybor == "Yes")
+    then
+    wybierz(frame, kcontext.getKieRuntime(), "Friday night lights");
+end
+
+
+rule "Do you like football? - No"
+    when
+    Wybor(pytanie == "Do you like football?" && wybor == "No")
+    then
+    ArrayList<String> warianty = new ArrayList<>();
+    warianty.add("No");
+    warianty.add("Yes");
+    Wybor wybor = zapytaj(frame, kcontext.getKieRuntime(), "Hospitals?", warianty);
+    insert (wybor);
+end
+
+rule "Hospitals? - No"
+    when
+    Wybor(pytanie == "Hospitals?" && wybor == "No")
+    then
+    wybierz(frame, kcontext.getKieRuntime(), "Parenthood");
+end
+
+
+rule "Hospitals? - Yes"
+    when
+    Wybor(pytanie == "Hospitals?" && wybor == "Yes")
+    then
+    wybierz(frame, kcontext.getKieRuntime(), "Grey's Anatomy");
+end
+
+
+rule "Feel like crying? - No"
+    when
+    Wybor(pytanie == "Feel like crying?" && wybor == "No")
+    then
+    ArrayList<String> warianty = new ArrayList<>();
+    warianty.add("Yes");
+    warianty.add("No");
+    Wybor wybor = zapytaj(frame, kcontext.getKieRuntime(), "Do you like Crime shows?", warianty);
+    insert (wybor);
+end
+
+rule "Do you like Crime shows? - Yes"
+    when
+    Wybor(pytanie == "Do you like Crime shows?" && wybor == "Yes")
+    then
+    ArrayList<String> warianty = new ArrayList<>();
+    warianty.add("Yes");
+    warianty.add("No");
+    Wybor wybor = zapytaj(frame, kcontext.getKieRuntime(), "Do you root for the criminals?", warianty);
+    insert (wybor);
+end
+
+rule "Do you root for the criminals? - Yes"
+    when
+    Wybor(pytanie == "Do you root for the criminals?" && wybor == "Yes")
+    then
+    wybierz(frame, kcontext.getKieRuntime(), "Dexter");
+end
+
+
+rule "Do you root for the criminals? - No"
+    when
+    Wybor(pytanie == "Do you root for the criminals?" && wybor == "No")
+    then
+    ArrayList<String> warianty = new ArrayList<>();
+    warianty.add("Forensics");
+    warianty.add("Psychology");
+    Wybor wybor = zapytaj(frame, kcontext.getKieRuntime(), "Forensics or psychology?", warianty);
+    insert (wybor);
+end
+
+rule "Forensics or psychology? - Forensics"
+    when
+    Wybor(pytanie == "Forensics or psychology?" && wybor == "Forensics")
+    then
+    wybierz(frame, kcontext.getKieRuntime(), "CSI: Miami");
+end
+
+
+rule "Forensics or psychology? - Psychology"
+    when
+    Wybor(pytanie == "Forensics or psychology?" && wybor == "Psychology")
+    then
+    wybierz(frame, kcontext.getKieRuntime(), "Criminal minds");
+end
+
+
+rule "Do you like Crime shows? - No"
+    when
+    Wybor(pytanie == "Do you like Crime shows?" && wybor == "No")
+    then
+    ArrayList<String> warianty = new ArrayList<>();
+    warianty.add("Yes");
+    warianty.add("No");
+    Wybor wybor = zapytaj(frame, kcontext.getKieRuntime(), "Meth?", warianty);
+    insert (wybor);
+end
+
+rule "Meth? - Yes"
+    when
+    Wybor(pytanie == "Meth?" && wybor == "Yes")
+    then
+    wybierz(frame, kcontext.getKieRuntime(), "Breaking bad");
+end
+
+
+rule "Meth? - No"
+    when
+    Wybor(pytanie == "Meth?" && wybor == "No")
+    then
+    wybierz(frame, kcontext.getKieRuntime(), "Mad men");
+end
+
+
+rule "Drama or Comedy? - Comedy"
+    when
+    Wybor(pytanie == "Drama or Comedy?" && wybor == "Comedy")
+    then
+    ArrayList<String> warianty = new ArrayList<>();
+    warianty.add("Yes");
+    warianty.add("No");
+    Wybor wybor = zapytaj(frame, kcontext.getKieRuntime(), "Do you like your characters to have questionable morals?", warianty);
+    insert (wybor);
+end
+
+rule "Do you like your characters to have questionable morals? - Yes"
+    when
+    Wybor(pytanie == "Do you like your characters to have questionable morals?" && wybor == "Yes")
+    then
+    ArrayList<String> warianty = new ArrayList<>();
+    warianty.add("Friends");
+    warianty.add("Family");
+    Wybor wybor = zapytaj(frame, kcontext.getKieRuntime(), "Friend group or dysfunctional family?", warianty);
+    insert (wybor);
+end
+
+rule "Friend group or dysfunctional family? - Friends"
+    when
+    Wybor(pytanie == "Friend group or dysfunctional family?" && wybor == "Friends")
+    then
+    wybierz(frame, kcontext.getKieRuntime(), "It's always sunny in Philadelphia");
+end
+
+
+rule "Friend group or dysfunctional family? - Family"
+    when
+    Wybor(pytanie == "Friend group or dysfunctional family?" && wybor == "Family")
+    then
+    wybierz(frame, kcontext.getKieRuntime(), "Arrested development");
+end
+
+
+rule "Do you like your characters to have questionable morals? - No"
+    when
+    Wybor(pytanie == "Do you like your characters to have questionable morals?" && wybor == "No")
+    then
+    ArrayList<String> warianty = new ArrayList<>();
+    warianty.add("Yes");
+    warianty.add("No");
+    Wybor wybor = zapytaj(frame, kcontext.getKieRuntime(), "Do you like strong family characters?", warianty);
+    insert (wybor);
+end
+
+rule "Do you like strong family characters? - Yes"
+    when
+    Wybor(pytanie == "Do you like strong family characters?" && wybor == "Yes")
+    then
+    ArrayList<String> warianty = new ArrayList<>();
+    warianty.add("Yes");
+    warianty.add("No");
+    Wybor wybor = zapytaj(frame, kcontext.getKieRuntime(), "Do you like them to sell drugs?", warianty);
+    insert (wybor);
+end
+
+rule "Do you like them to sell drugs? - Yes"
+    when
+    Wybor(pytanie == "Do you like them to sell drugs?" && wybor == "Yes")
+    then
+    wybierz(frame, kcontext.getKieRuntime(), "Weeds");
+end
+
+
+rule "Do you like them to sell drugs? - No"
+    when
+    Wybor(pytanie == "Do you like them to sell drugs?" && wybor == "No")
+    then
+    ArrayList<String> warianty = new ArrayList<>();
+    warianty.add("Amy");
+    warianty.add("Tina");
+    Wybor wybor = zapytaj(frame, kcontext.getKieRuntime(), "Tina Fey or Amy Poehler?", warianty);
+    insert (wybor);
+end
+
+rule "Tina Fey or Amy Poehler? - Amy"
+    when
+    Wybor(pytanie == "Tina Fey or Amy Poehler?" && wybor == "Amy")
+    then
+    wybierz(frame, kcontext.getKieRuntime(), "Parks & Recreation");
+end
+
+
+rule "Tina Fey or Amy Poehler? - Tina"
+    when
+    Wybor(pytanie == "Tina Fey or Amy Poehler?" && wybor == "Tina")
+    then
+    wybierz(frame, kcontext.getKieRuntime(), "30 Rock");
+end
+
+
+rule "Do you like strong family characters? - No"
+    when
+    Wybor(pytanie == "Do you like strong family characters?" && wybor == "No")
+    then
+    ArrayList<String> warianty = new ArrayList<>();
+    warianty.add("Yes");
+    warianty.add("No");
+    Wybor wybor = zapytaj(frame, kcontext.getKieRuntime(), "Work place humor?", warianty);
+    insert (wybor);
+end
+
+rule "Work place humor? - Yes"
+    when
+    Wybor(pytanie == "Work place humor?" && wybor == "Yes")
+    then
+    wybierz(frame, kcontext.getKieRuntime(), "the office");
+end
+
+
+rule "Work place humor? - No"
+    when
+    Wybor(pytanie == "Work place humor?" && wybor == "No")
+    then
+    ArrayList<String> warianty = new ArrayList<>();
+    warianty.add("Yes");
+    warianty.add("No");
+    Wybor wybor = zapytaj(frame, kcontext.getKieRuntime(), "Want to see James Franco & Seth Rogen as high schoolers?", warianty);
+    insert (wybor);
+end
+
+rule "Want to see James Franco & Seth Rogen as high schoolers? - Yes"
+    when
+    Wybor(pytanie == "Want to see James Franco & Seth Rogen as high schoolers?" && wybor == "Yes")
+    then
+    wybierz(frame, kcontext.getKieRuntime(), "Freaks & geeks");
+end
+
+
+rule "Want to see James Franco & Seth Rogen as high schoolers? - No"
+    when
+    Wybor(pytanie == "Want to see James Franco & Seth Rogen as high schoolers?" && wybor == "No")
+    then
+    ArrayList<String> warianty = new ArrayList<>();
+    warianty.add("Bar");
+    warianty.add("Cafe");
+    Wybor wybor = zapytaj(frame, kcontext.getKieRuntime(), "Do you want your nyc friends to hang out at a bar or cafe?", warianty);
+    insert (wybor);
+end
+
+rule "Do you want your nyc friends to hang out at a bar or cafe? - Bar"
+    when
+    Wybor(pytanie == "Do you want your nyc friends to hang out at a bar or cafe?" && wybor == "Bar")
+    then
+    wybierz(frame, kcontext.getKieRuntime(), "How I met your mother");
+end
+
+
+rule "Do you want your nyc friends to hang out at a bar or cafe? - Cafe"
+    when
+    Wybor(pytanie == "Do you want your nyc friends to hang out at a bar or cafe?" && wybor == "Cafe")
+    then
+    wybierz(frame, kcontext.getKieRuntime(), "Friends");
+end
+
+
+rule "Drama or Comedy? - A little of both"
+    when
+    Wybor(pytanie == "Drama or Comedy?" && wybor == "A little of both")
+    then
+    ArrayList<String> warianty = new ArrayList<>();
+    warianty.add("Small town");
+    warianty.add("Prison");
+    Wybor wybor = zapytaj(frame, kcontext.getKieRuntime(), "Small town or prison?", warianty);
+    insert (wybor);
+end
+
+rule "Small town or prison? - Small town"
+    when
+    Wybor(pytanie == "Small town or prison?" && wybor == "Small town")
+    then
+    wybierz(frame, kcontext.getKieRuntime(), "Gilmore Girls");
+end
+
+
+rule "Small town or prison? - Prison"
+    when
+    Wybor(pytanie == "Small town or prison?" && wybor == "Prison")
+    then
+    wybierz(frame, kcontext.getKieRuntime(), "Oitnb");
+end
+
+function Wybor zapytaj(JFrame frame, KieRuntime krt, String pytanie, ArrayList wybory) {
+
+    class Klient implements ItemListener {
+        private String wybrana;
+        private Wybor wybor;
+
+        public Klient(Wybor odp, String wybrana) {
+            this.wybrana = wybrana;
+            this.wybor = odp;
+        }
+
+        @Override
+        public void itemStateChanged(ItemEvent event) {
+            if (event.getStateChange() == ItemEvent.SELECTED) {
+                wybor.setWybor(wybrana);
+            }
+        }
+    }
+
+    Wybor wybor = new Wybor(pytanie, (String) wybory.get(0));
+
+    final JPanel panel = new JPanel(new GridLayout(0, 1));
+    panel.add(new JLabel(pytanie));
+
+    ArrayList < JRadioButton > przyciski = new ArrayList < > ();
+
+    for (int i = 0; i < wybory.size(); i++) {
+        String text = (String) wybory.get(i);
+        JRadioButton nowy = new JRadioButton(text);
+        Klient nowyKlient = new Klient(wybor, text);
+        nowy.addItemListener(nowyKlient);
+        przyciski.add(nowy);
+    }
+
+    przyciski.get(0).setSelected(true);
+
+    wybor.setWybor((String) wybory.get(0));
+
+    ButtonGroup grupa_przycisków = new ButtonGroup();
+    for (int i = 0; i < przyciski.size(); i++) {
+        grupa_przycisków.add(przyciski.get(i));
+        panel.add(przyciski.get(i));
+    }
+    Object[] options = {
+        "Proceed"
+    };
+    if (JOptionPane.showConfirmDialog(frame, panel, "Question", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE) < 0) {
+        wybor.setWybor("End");
+    }
+
+    return wybor;
+}
+
+function void wybierz(JFrame frame, KieRuntime krt, String wybrane) {
+    final JPanel panel = new JPanel();
+    String tekst = wybrane;
+
+    panel.add(new JLabel(tekst));
+    JOptionPane.showMessageDialog(frame, panel);
+}
